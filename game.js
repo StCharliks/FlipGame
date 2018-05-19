@@ -134,7 +134,7 @@ function getPath(difficult, index){
 	}
 
 	if (difficult == 8){
-		return "Flags(Normal)/normal"+i+".jpg";
+		return "Flags(medium)/medium"+i+".jpg";
 	}
 
 	if (difficult == 10){
