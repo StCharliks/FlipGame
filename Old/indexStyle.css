@@ -1,0 +1,147 @@
+/*Конец анимации*/
+html{
+	height:100%;			
+	background:#e0e0e0 repeat-x;
+}
+
+body{
+	font-family: Verdana;
+	margin: 0;
+}
+
+@media screen and (min-width: 0px){
+	h1{
+		font-size: 20pt;
+	}
+}
+
+@media screen and (min-width: 800px){
+	h1{
+		font-size: 30pt;
+	}
+}
+
+@media screen and (min-width: 1200px){
+	h1{
+		font-size: 40pt;
+	}
+}
+/*@media screen and (min-width: 0px) {
+    h1 {
+        font-size: 10pt;
+    }
+}*/
+
+h1{
+	color: #FFF5EE;
+	font-family: Pobeda;
+	vertical-align: middle;
+}
+
+.Header{
+	background-color: #2a2a2a;
+	display: flex;
+	width: 100%;
+	padding: 0%;
+	align-items: center;
+	justify-content: center;
+}
+
+.siteHeader{
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+.siteLogo{
+	-webkit-backface-visibility: hidden;
+	width: 300px;
+	z-index: 1000;
+	display: inline-block;
+}
+.cards{
+	text-align: center;
+}
+.card{
+	width: 400px;
+	height: 200px;
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	margin: 10px 10px 10px 10px;
+}
+
+@media screen and (min-width: 0px)
+{
+	.card{
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+@media screen and (min-width: 820px)
+{
+	.card{
+		margin-left: 40px;
+		margin-right: 40px;
+	}
+}
+
+@media screen and (min-width: 1200px)
+{
+	.card{
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}
+.card img {
+		width: 100%;
+		height: 100%;
+	}
+
+.card .caption {
+  background-color: #666;
+  background-image: linear-gradient(-123deg, #2d363d 0%, #677274 20%, #7a8485 28%, #9d9c98 61%, #c3b5a8 100%);
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 10px;
+  transition: all 1s;
+  transform: translateY(0%);
+}
+
+.card:hover .caption {
+	transform: translateY(-100%);
+}
+
+.cardLink{
+	position: absolute;
+	top:0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.footer{
+	background-color: #2a2a2a;
+	text-align: center;
+	color:#FFF5EE;
+}
+
+.footer a{
+    text-decoration: none;
+    color:#FFF5EE;
+}
+
+.footer a:hover{
+	font-style: italic;
+}
+
+.footer div{
+	
+	font-family: Pobeda; 
+}
+
+.lol:hover{
+	font-size: 50px;
+}

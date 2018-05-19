@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GeoFlip</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="Styles/index.css">
+</head>
+<body>
+	<div id="gameHeader" class="gameHeader">
+		<h1>GeoFlip</h1>
+		<input id="inputField" type="text" name="playerName" placeholder="Name">		
+	</div>
+
+	<div class="timer" id="timer"></div>
+	<div class="gameField" id="gameField">
+
+	</div>
+	<div id="menu">
+		<div class="difficult">
+			<select id="diffChoser">
+				<option value="4">Easy(6x6)</option>
+				<option value="8">Normal(8x8)</option>
+				<option value="10">Hard(10x10)</option>
+			</select>
+		</div>
+
+		<div class="cover" id="cover">
+			<img src="Covers/1.png">
+			<img src="Covers/1.png">
+			<img src="Covers/1.png">
+			<img src="Covers/1.png">
+		</div>
+
+		<input class="start" type="button" id="StartGame" name="StartGame" value="StartGame">
+
+		<ul id="recordList" class="recordList">
+			<li>Петя - 20 сек 4 ошибки</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="classes.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+	<script type="text/javascript">
+		function coverLight(e){
+			if(e.target.tagName == 'IMG')
+			{
+				let images = document.getElementsByClassName('select');
+					
+				for (i = 0; i < images.length; i++){
+					images[i].classList.toggle('select');
+				}
+
+				e.target.classList.toggle('select');
+				sound.play();
+				coverPath = e.target.src;
+			}
+		}
+
+		function checkInput(e){
+			if ((typeof e.target.value == "undefined") || (e.target.value == "") ){
+				e.target.placeholder = "Заполнить!";
+			}
+			Name = e.target.value;
+			console.log(e.target.value);
+		}
+
+		function checkData(e){
+			console.log("Вошли");
+			if (Name == ""){
+				alert("Вы не ввели имя");
+				return;
+			}
+
+			if (coverPath == ""){
+				alert("Вы не выбрали подложку");
+				return;
+			}
+
+			StartGame(Name, document.getElementById("diffChoser").value, coverPath);
+		}
+
+		var sound = new MediaPlayer(['Zvuk_-_CSHelchek (mp3cut.ru).mp3'], 1);
+		let coverPath = "";
+		let Name = ""
+		let covers = document.getElementById("cover");
+		cover.onclick = coverLight;
+
+		document.getElementById("inputField").addEventListener("mouseout", checkInput);
+		document.getElementById("StartGame").addEventListener("click", checkData);
+	</script>
+</body>
+</html>
