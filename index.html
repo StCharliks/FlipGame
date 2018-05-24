@@ -18,7 +18,7 @@
 	<div id="menu">
 		<div class="difficult">
 			<select id="diffChoser">
-				<option value="4">Easy(6x6)</option>
+				<option value="6">Easy(6x6)</option>
 				<option value="8">Normal(8x8)</option>
 				<option value="10">Hard(10x10)</option>
 			</select>
@@ -26,20 +26,16 @@
 
 		<div class="cover" id="cover">
 			<img src="Covers/1.png">
-			<img src="Covers/1.png">
-			<img src="Covers/1.png">
-			<img src="Covers/1.png">
+			<img src="Covers/2.jpg">
+			<img src="Covers/3.jpg">
+			<img src="Covers/4.jpg">
 		</div>
 
 		<input class="start" type="button" id="StartGame" name="StartGame" value="StartGame">
-
-		<ul id="recordList" class="recordList">
-			<li>Петя - 20 сек 4 ошибки</li>
-		</ul>
 	</div>
 
-	<script type="text/javascript" src="classes.js"></script>
-	<script type="text/javascript" src="game.js"></script>
+	<script type="text/javascript" src="Scripts/classes.js"></script>
+	<script type="text/javascript" src="Scripts/game.js"></script>
 	<script type="text/javascript">
 		function coverLight(e){
 			if(e.target.tagName == 'IMG')

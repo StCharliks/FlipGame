@@ -1,21 +1,39 @@
+var checkedCards = Array();
+let images = Array();
+let player = "";
+let timer = null;
 
+const FLIP_TIMEOUT = 250;
+const SHOW_TIMEOUT = 800;
 
+//compare two cards and return thue if they are the same
 function isSame(){
 	return checkedCards[0].src == checkedCards[1].src;
 }
 
-function flipBack(){
-	let imageBufer = checkedCards[0].src;
-	checkedCards[0].src = checkedCards[0].alt;
-	checkedCards[0].alt = imageBufer;
 
-	imageBufer = checkedCards[1].src;
-	checkedCards[1].src = checkedCards[1].alt;
-	checkedCards[1].alt = imageBufer;
+//Flips the card back
+function flipBack(){
+
+	checkedCards[0].style.transform = "rotateY(0deg)";
+	checkedCards[1].style.transform = "rotateY(0deg)";
+
+	let imageBufer1 = checkedCards[0].src;
+	let imageBufer2 = checkedCards[1].src;
+
+	setTimeout(FLIP_TIMEOUT, () => {
+		checkedCards[0].alt = imageBufer1;
+		checkedCards[1].alt = imageBufer2;	
+	})
+	
+	checkedCards[0].src = coverPath;
+	checkedCards[1].src = coverPath;
 
 	checkedCards = Array();
 }
 
+
+//Checks the end of the game and stops the game if it is necessary
 function checkGame(){
 	if (timer.get_currentTime() <= 0){
 		let playField = document.getElementById("gameField");
@@ -49,15 +67,11 @@ function checkGame(){
 		document.getElementById("gameField").style.display = "none";
 
 		alert("Вы выиграли!");
-		let records = document.getElementById("recordList");
-		newRecord = document.createElement("li");
-		newRecord.innerHTML = player;
-		records.appendChild(newRecord);
 	}
-
-
 }
 
+
+//checks for matches if two cards are selected
 function checkMatch(){
 	if (checkedCards.length == 2){
 		if (isSame()){
@@ -69,11 +83,13 @@ function checkMatch(){
 		else{
 			checkedCards[0].id = "free";
 			checkedCards[1].id = "free";
-			setTimeout(flipBack, 500);
+			setTimeout(flipBack, SHOW_TIMEOUT);
 		}
 	}
 }
 
+
+//setup start parameters and start game
 function StartGame(playerName, difficult, coverPath){
 	//Настраиваем графические элементы
 	document.getElementById("menu").style.display = "none";
@@ -87,23 +103,33 @@ function StartGame(playerName, difficult, coverPath){
 	timer = new Timer(()=>{
 	document.getElementById("timer").style.width = (100/timer.get_interval())*timer.get_currentTime() + "%";
 
-	if (timer.get_currentTime() < 20){
+	if (timer.get_currentTime() < 20000){
 		document.getElementById("timer").style.backgroundcolor = "red";
 	}
 	}, 60000);
 
-	timer.start();
-	//document.getElementById("menu").style.display = "block";
+	timer.start();;
 }
 
+
+//OnClick handler, allow user to click on card chose it
 function onImageClick(event){
 	let target = event.target;
 
 	console.log("Обработано");
 	if ((target.tagName == "IMG")&&(checkedCards.length < 2)&&(target.id == "free")){
+		if (target.style.transform != "rotateY(360deg)")
+			target.style.transform = "rotateY(360deg)";
+
 		let imageBufer = target.src;
+		
+		
+		setTimeout(FLIP_TIMEOUT, () => {
+			
+			target.alt = imageBufer;
+		})
+
 		target.src = target.alt;
-		target.alt = imageBufer;
 
 		target.id = "Checked";
 		checkedCards.push(target);
@@ -114,6 +140,8 @@ function onImageClick(event){
 	checkGame();
 }
 
+
+//places cards on the playing field
 function drawImages(images, difficult){
 	let gameField = document.getElementById("gameField");
 
@@ -128,8 +156,10 @@ function drawImages(images, difficult){
 	}
 }
 
+
+//return path to folder with flags
 function getPath(difficult, index){
-	if (difficult == 4){
+	if (difficult == 6){
 		return "Flags(Easy)/easy"+i+".jpg";
 	}
 
@@ -142,9 +172,9 @@ function getPath(difficult, index){
 	}
 }
 
+
+//load images into array
 function loadImages(coverPath, difficult){
-	//let gameField = document.getElementById("gameField");
-	//let images = Array();
 	let count = Number(difficult)*Number(difficult)/2;
 
 	for (j = 1; j <= 2; j++){
@@ -152,6 +182,7 @@ function loadImages(coverPath, difficult){
 			let flag = document.createElement("img");
 			flag.alt = getPath(difficult, i);
 			flag.src = coverPath;
+			flag.style.background = "url("+getPath(difficult, i);+")";
 			flag.id = "free";
 			images.push(flag);
 		}
@@ -160,8 +191,3 @@ function loadImages(coverPath, difficult){
 	console.log(images);
 	return images;	
 }
-
-var checkedCards = Array();
-let images = Array();
-let player = "";
-let timer = null;

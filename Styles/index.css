@@ -65,6 +65,7 @@ body{
 	width: 150px;
 	height: 300px;
 	margin-left: 5px;
+	/*transition: transform 3s linear;*/
 }
 
 .start{
@@ -86,6 +87,11 @@ body{
 .gameField img{
 	display: inline-block;
 	margin: 2px 2px 2px 2px;
+	-o-transition: transform 0.5s linear;
+	-ms-transition: transform 0.5s linear;
+	-moz-transition: transform 0.5s linear;
+	-webkit-transition: transform 0.5s linear;
+	transition: transform 0.5s linear;
 }
 
 .timer{

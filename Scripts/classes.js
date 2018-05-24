@@ -1,29 +1,15 @@
-	class FormReader{
-
-	}
-	//Этот класс будет описывать карточки
-	class Country{
-
-	}
-
-	//Класс, представляющий собой поле для игры
-	class Field{
-
-	}
-	//Класс, описывающий панель времени
+	//Class timer - intended for countdown time
 	class Timer{
+		//parameters:
+		//@callback - function that call at each tick of the timer 
+		//@time_interval - start timer value
 		constructor(callback, time_interval){
 			this.callback = callback;
 			this.interval = time_interval ? time_interval:0;
 			this.currentTime = this.interval;
-			//this.timer = document.createElement('span');
-			//отрисовка таймера
-			//this.timer.innerHTML = this.interval;
-			//установка его в DOM-модель
-			//var body = document.getElementById('body');
-			//body.appendChild(this.timer);
 		}
 
+		//Start timer
 		start(){
 			let timeID = setInterval(()=>{
 				if (this.currentTime == 0)
@@ -31,28 +17,32 @@
 					clearInterval(timeID);
 				}
 				this.callback();
-				console.log(this.currentTime);
 				this.currentTime--;
 			}, 1);
 		}
 
+		//stops timer
 		stop(){
 			this.currentTime = 0;
 		}
 
+		//restart timer
 		restart(){
 			this.currentTime = this.interval;
 			this.start();
 		}
 
+		//return currentTime
 		get_currentTime(){
 			return this.currentTime;
 		}
 
+		//return timer time interval
 		get_interval(){
 			return this.interval;
 		}
 
+		//set interval function
 		set_interval(time){
 			this.interval = time;
 		}
@@ -65,8 +55,13 @@
 			this.callback = callback;
 		}
 	}
-	//класс, описывающий работу со звуком
+
+	//Class that realize media playr functions
 	class MediaPlayer{
+		//@params
+		//@pathArr - path to array with sounds
+		//@volume - value of volume(0 <= volume <=1)
+		//@loop - setup timer for loop or not
 		constructor(pathArr, volume, loop){
 
 			console.log("I'm here");
@@ -111,20 +106,3 @@
 			this.audio.volume = (volume <= 1)? volume:1;
 		}
 	}
-
-
-/*	let Images = false;
-
-	if (Images)
-	{
-		var media = new MediaPlayer(['music_main_theme.ogg'], 0.1, "loop");
-		var sound = new MediaPlayer(['Zvuk_-_CSHelchek (mp3cut.ru).mp3'], 1);
-		let timer = new Timer(() => {sound.play()}, 2);
-		//media.stop();
-		//sound.play();
-		media.play();
-		timer.start();
-	}
-</script>
-</body>
-</html>*/
